@@ -1,0 +1,26 @@
+Well i didn't see any thread about this so let's start one :DRINK:
+
+Specify the Directory Index:
+DirectoryIndex newindex.html
+
+Specify 404 error:
+ErrorDocument 404 /404error.html
+
+Redirect 301
+Redirect 301 /old.html /new.html
+
+Resolve www (make www.website.com become website.com)
+RewriteEngine On
+RewriteCond %{HTTP_HOST}  ^www.website.com [nocase]
+RewriteRule ^(.*)         http://website.com/$1 [last,redirect=301]
+
+Deny access to specific ip (123.45.6.6)
+order allow,deny
+deny from 123.45.6.6
+allow from all
+
+Prevent Hot linking
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?website.com/.*$ [NC]
+RewriteRule \.(gif|jpg|css)$ - [F]
